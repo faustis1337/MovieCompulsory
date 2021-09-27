@@ -4,6 +4,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MovieCompulsory.Infrastrucu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCompulsory.DataJson", "MovieCompulsory.DataJson\MovieCompulsory.DataJson.csproj", "{14413BD0-7F97-42DC-A958-907C28EE41A1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MovieCompulsory.Core", "MovieCompulsory.Core", "{FD377CA1-A40A-4C88-9CDB-4F9DA3182485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCompulsory.Domain", "MovieCompulsory.Domain\MovieCompulsory.Domain.csproj", "{9FEDAE13-5B9C-453B-B084-B33346686F55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCompulsory.Core", "MovieCompulsory.Core\MovieCompulsory.Core.csproj", "{EECBE08B-518F-4EF2-8FC0-F21B51C90DAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,8 +20,18 @@ Global
 		{14413BD0-7F97-42DC-A958-907C28EE41A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14413BD0-7F97-42DC-A958-907C28EE41A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14413BD0-7F97-42DC-A958-907C28EE41A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FEDAE13-5B9C-453B-B084-B33346686F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FEDAE13-5B9C-453B-B084-B33346686F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FEDAE13-5B9C-453B-B084-B33346686F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FEDAE13-5B9C-453B-B084-B33346686F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EECBE08B-518F-4EF2-8FC0-F21B51C90DAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EECBE08B-518F-4EF2-8FC0-F21B51C90DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EECBE08B-518F-4EF2-8FC0-F21B51C90DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EECBE08B-518F-4EF2-8FC0-F21B51C90DAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{14413BD0-7F97-42DC-A958-907C28EE41A1} = {675046C6-52D8-4A15-A719-4F601F138C8D}
+		{9FEDAE13-5B9C-453B-B084-B33346686F55} = {FD377CA1-A40A-4C88-9CDB-4F9DA3182485}
+		{EECBE08B-518F-4EF2-8FC0-F21B51C90DAD} = {FD377CA1-A40A-4C88-9CDB-4F9DA3182485}
 	EndGlobalSection
 EndGlobal
