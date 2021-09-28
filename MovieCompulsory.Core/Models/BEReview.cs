@@ -4,10 +4,10 @@ namespace MovieCompulsory.Core.Models
 {
     public class BEReview
     {
-        private int Reviewer;
-        private int Movie;
-        private int Grade;
-        private DateTime ReviewDate;
+        public int Reviewer;
+        public int Movie;
+        public int Grade;
+        public DateTime ReviewDate;
 
     }
 }

@@ -8,4 +8,13 @@
       <ProjectReference Include="..\MovieCompulsory.Domain\MovieCompulsory.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MovieCompulsory.Core\MovieCompulsory.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+
 </Project>
