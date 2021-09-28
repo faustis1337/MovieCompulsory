@@ -1,7 +1,10 @@
-﻿namespace MovieCompulsory.DataJson.Repository
+﻿using MovieCompulsory.Domain.IRepository;
+
+namespace MovieCompulsory.DataJson.Repository
 {
-    public class MovieRepository
+    public class ReviewRepository : IReviewRepository
+
     {
-        
+
     }
 }
