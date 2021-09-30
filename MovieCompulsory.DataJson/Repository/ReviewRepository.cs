@@ -90,17 +90,19 @@ namespace MovieCompulsory.DataJson.Repository
 
         public List<int> GetTopRatedMovies(int amount)
         {
-            throw new System.NotImplementedException();
+            return _data.GetAllReviews().OrderByDescending(review => review.Grade).Select(review => review.Movie).Distinct().Take(amount).ToList(); 
         }
 
         public List<int> GetTopMoviesByReviewer(int reviewer)
         {
-            throw new System.NotImplementedException();
+            return _data.GetAllReviews().OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
+                .Where(review => review.Reviewer == reviewer).Select(review => review.Movie).ToList();
         }
 
         public List<int> GetReviewersByMovie(int movie)
         {
-            throw new System.NotImplementedException();
+            return _data.GetAllReviews().OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
+                .Where(review => review.Movie == movie).Select(review => review.Reviewer).ToList();
         }
     }
 }
