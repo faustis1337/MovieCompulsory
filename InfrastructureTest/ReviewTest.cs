@@ -12,7 +12,7 @@ namespace InfrastructureTest
         private readonly JsonData data = new JsonData();
         
         [Fact]
-        public void GetNumberOfReviewsFromReviewerTest()
+        public void GetNumberOfReviewsFromReviewer()
         {
             IReviewRepository repository = new ReviewRepository(data);
             int result = repository.GetNumberOfReviewsFromReviewer(1);
@@ -21,7 +21,7 @@ namespace InfrastructureTest
         }
         
         [Fact]
-        public void GetNumberOfReviewsFromReviewerTestZero()
+        public void GetNumberOfReviewsFromReviewerZero()
         {
             int reviewer = 0;
             IReviewRepository repository = new ReviewRepository(data);
@@ -31,7 +31,7 @@ namespace InfrastructureTest
         }
         
         [Fact]
-        public void GetAverageRateFromReviewerTest()
+        public void GetAverageRateFromReviewer()
         {
             IReviewRepository repository = new ReviewRepository(data);
             double result = repository.GetAverageRateFromReviewer(1);
@@ -40,7 +40,7 @@ namespace InfrastructureTest
         }
         
         [Fact]
-        public void GetAverageRateFromReviewerTestZero()
+        public void GetAverageRateFromReviewerZero()
         {
             int reviewer = 0;
             IReviewRepository repository = new ReviewRepository(data);
@@ -50,7 +50,7 @@ namespace InfrastructureTest
         }
         
         [Fact]
-        public void GetNumberOfRatesByReviewerTest()
+        public void GetNumberOfRatesByReviewer()
         {
             IReviewRepository repository = new ReviewRepository(data);
             double result = repository.GetNumberOfRatesByReviewer(1, 4);
@@ -59,7 +59,7 @@ namespace InfrastructureTest
         }
         
         [Fact]
-        public void GetNumberOfReviewsTest()
+        public void GetNumberOfReviews()
         {
             IReviewRepository repository = new ReviewRepository(data);
             double result = repository.GetNumberOfReviews(2);
@@ -68,14 +68,14 @@ namespace InfrastructureTest
         }
 
         [Fact]
-        public void GetAverageRateOfMovieTest()
+        public void GetAverageRateOfMovie()
         {
             IReviewRepository repository = new ReviewRepository(data);
             double result = repository.GetAverageRateOfMovie(1);
             
             Assert.Equal(3.7,result);
         }
-        
+
         [Fact]
         public void GetNumberOfRates()
         {
@@ -94,6 +94,43 @@ namespace InfrastructureTest
             Assert.Equal(new List<int>{1,2,3,4,5},result);
         }
         
+        [Fact]
+        public void GetMostProductiveReviewers()
+        {
+            //How to make sure to test them correctly
+            IReviewRepository repository = new ReviewRepository(data);
+            List<int> result = repository.GetMostProductiveReviewers();
+            
+            Assert.Equal(result, result);
+        }
+        
+        [Fact]
+        public void GetTopRatedMovies()
+        {
+            IReviewRepository repository = new ReviewRepository(data);
+            List<int> result = repository.GetTopRatedMovies(4);
+            
+            Assert.Equal(new List<int>{2,1,5,3}, result);
+        }
+
+        [Fact]
+        public void GetTopMoviesByReviewer()
+        {
+            IReviewRepository repository = new ReviewRepository(data);
+            List<int> result = repository.GetTopMoviesByReviewer(2);
+            
+            Assert.Equal(new List<int>{4,3}, result);
+        }
+
+        [Fact]
+        public void GetReviewersByMovie()
+        {
+            IReviewRepository repository = new ReviewRepository(data);
+            List<int> result = repository.GetReviewersByMovie(4);
+            
+            Assert.Equal(result, result);
+        }
+
         
         
         

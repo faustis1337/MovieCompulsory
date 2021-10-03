@@ -80,12 +80,40 @@ namespace MovieCompulsory.DataJson.Repository
 
         public List<int> GetMoviesWithHighestNumberOfTopRates()
         {
-            return _data.GetAllReviews().OrderBy(r => r.Movie).Where(r => r.Grade == 5).Take(5).Select(r => r.Movie).ToList();
+            int highestId = _data.GetAllReviews().Max(m => m.Movie);
+            List<int> highestTopRates = new List<int>(5);
+
+            for (int i = 1; i <= highestId; i++)
+            {
+                int numberOfTopScores = _data.GetAllReviews().Where(m => m.Movie == i).Count(m => m.Grade == 5);
+                if (i < 6)
+                {
+                    highestTopRates.Add(i);
+                }else if (highestTopRates.Min() < numberOfTopScores)
+                {
+                    highestTopRates.Remove(highestTopRates.Min());
+                    highestTopRates.Add(i);
+                }
+            }
+
+
+
+            return highestTopRates;
         }
 
         public List<int> GetMostProductiveReviewers()
         {
-            throw new System.NotImplementedException();
+            int highestReviewerId = _data.GetAllReviews().Max(m => m.Reviewer);
+            Dictionary<int, int> reviewerProductivity = new Dictionary<int, int>();
+
+            for (int i = 1; i < highestReviewerId; i++)
+            {
+                int id = i;
+                int count = _data.GetAllReviews().Count(r => r.Reviewer == id);
+                reviewerProductivity.Add(i,count);
+            }
+            
+            return reviewerProductivity.OrderByDescending(key => key.Value).Select(value => value.Key).ToList();
         }
 
         public List<int> GetTopRatedMovies(int amount)
