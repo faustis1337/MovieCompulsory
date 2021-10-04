@@ -18,7 +18,7 @@ namespace MovieCompulsory.DataJson
             /*<ItemGroup>
                 <Content Include="..\..\ratings.json" />
                 </ItemGroup>*/
-            using (StreamReader r = new StreamReader(@"C:\Users\Faust\RiderProjects\MovieCompulsory\MovieCompulsory.DataJson\ratings.json"))
+            using (StreamReader r = new StreamReader(@"../../../../MovieCompulsory.DataJson/ratings.json"))
             {
                 string json = r.ReadToEnd();
                 items = JsonConvert.DeserializeObject<List<BEReview>>(json);
