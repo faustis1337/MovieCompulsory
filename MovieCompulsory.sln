@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MovieCompulsory.Test", "Mov
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureTest", "InfrastructureTest\InfrastructureTest.csproj", "{2A912058-0CCB-4FF9-B89E-085309559FE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCompulsory.UI", "MovieCompulsory.UI\MovieCompulsory.UI.csproj", "{ED8D0105-DBB3-4172-BCFF-B9601FAF1B30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{2A912058-0CCB-4FF9-B89E-085309559FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A912058-0CCB-4FF9-B89E-085309559FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A912058-0CCB-4FF9-B89E-085309559FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8D0105-DBB3-4172-BCFF-B9601FAF1B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8D0105-DBB3-4172-BCFF-B9601FAF1B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8D0105-DBB3-4172-BCFF-B9601FAF1B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8D0105-DBB3-4172-BCFF-B9601FAF1B30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{14413BD0-7F97-42DC-A958-907C28EE41A1} = {675046C6-52D8-4A15-A719-4F601F138C8D}

@@ -9,15 +9,20 @@ namespace MovieCompulsory.DataJson.Repository
     public class ReviewRepository : IReviewRepository
 
     {
-        private readonly JsonData _data;
-        public ReviewRepository(JsonData data)
+        private readonly List<BEReview> _allReviews;
+        public ReviewRepository()
         {
-            _data = data;
+            _allReviews = new JsonData().GetAllReviews();
         }
         
+        public ReviewRepository(List<BEReview> reviews)
+        {
+            _allReviews = reviews;
+        }
+
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
-            int numberOfReviews= _data.GetAllReviews().Count(r => r.Reviewer == reviewer);
+            int numberOfReviews= _allReviews.Count(r => r.Reviewer == reviewer);
             if (numberOfReviews == 0)
             {
                 throw new InvalidOperationException("No reviewer was found with id " + reviewer);
@@ -29,7 +34,7 @@ namespace MovieCompulsory.DataJson.Repository
         public double GetAverageRateFromReviewer(int reviewer)
         {
             int numberOfReviews = GetNumberOfReviewsFromReviewer(reviewer);
-            IEnumerable<int> totalReviewsArray = _data.GetAllReviews().Where(r => r.Reviewer == reviewer).Select(r => r.Grade);
+            IEnumerable<int> totalReviewsArray = _allReviews.Where(r => r.Reviewer == reviewer).Select(r => r.Grade);
             int totalReviews = 0;
             
             if (totalReviewsArray.Count() == null)
@@ -48,19 +53,19 @@ namespace MovieCompulsory.DataJson.Repository
 
         public int GetNumberOfRatesByReviewer(int reviewer, int rate)
         {
-            return _data.GetAllReviews()
+            return _allReviews
                 .Where(r => r.Reviewer == reviewer).Count(rt => rt.Grade == rate);
         }
 
         public int GetNumberOfReviews(int movie)
         {
-            return _data.GetAllReviews().Count(r => r.Movie == movie);
+            return _allReviews.Count(r => r.Movie == movie);
         }
 
         public double GetAverageRateOfMovie(int movie)
         {
             int numberOfReviews = GetNumberOfReviews(movie);
-            IEnumerable<int> totalReviewsArray = _data.GetAllReviews().Where(r => r.Movie == movie).Select(r => r.Grade);
+            IEnumerable<int> totalReviewsArray = _allReviews.Where(r => r.Movie == movie).Select(r => r.Grade);
             int totalReviews = 0;
 
             foreach (var review in totalReviewsArray)
@@ -74,18 +79,18 @@ namespace MovieCompulsory.DataJson.Repository
 
         public int GetNumberOfRates(int movie, int rate)
         {
-            return _data.GetAllReviews()
+            return _allReviews
                 .Where(r => r.Movie == movie).Count(rt => rt.Grade == rate);
         }
 
         public List<int> GetMoviesWithHighestNumberOfTopRates()
         {
-            int highestId = _data.GetAllReviews().Max(m => m.Movie);
+            int highestId = _allReviews.Max(m => m.Movie);
             List<int> highestTopRates = new List<int>(5);
 
             for (int i = 1; i <= highestId; i++)
             {
-                int numberOfTopScores = _data.GetAllReviews().Where(m => m.Movie == i).Count(m => m.Grade == 5);
+                int numberOfTopScores = _allReviews.Where(m => m.Movie == i).Count(m => m.Grade == 5);
                 if (i < 6)
                 {
                     highestTopRates.Add(i);
@@ -103,13 +108,13 @@ namespace MovieCompulsory.DataJson.Repository
 
         public List<int> GetMostProductiveReviewers()
         {
-            int highestReviewerId = _data.GetAllReviews().Max(m => m.Reviewer);
+            int highestReviewerId = _allReviews.Max(m => m.Reviewer);
             Dictionary<int, int> reviewerProductivity = new Dictionary<int, int>();
 
             for (int i = 1; i < highestReviewerId; i++)
             {
                 int id = i;
-                int count = _data.GetAllReviews().Count(r => r.Reviewer == id);
+                int count = _allReviews.Count(r => r.Reviewer == id);
                 reviewerProductivity.Add(i,count);
             }
             
@@ -118,18 +123,18 @@ namespace MovieCompulsory.DataJson.Repository
 
         public List<int> GetTopRatedMovies(int amount)
         {
-            return _data.GetAllReviews().OrderByDescending(review => review.Grade).Select(review => review.Movie).Distinct().Take(amount).ToList(); 
+            return _allReviews.OrderByDescending(review => review.Grade).Select(review => review.Movie).Distinct().Take(amount).ToList(); 
         }
 
         public List<int> GetTopMoviesByReviewer(int reviewer)
         {
-            return _data.GetAllReviews().OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
+            return _allReviews.OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
                 .Where(review => review.Reviewer == reviewer).Select(review => review.Movie).ToList();
         }
 
         public List<int> GetReviewersByMovie(int movie)
         {
-            return _data.GetAllReviews().OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
+            return _allReviews.OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
                 .Where(review => review.Movie == movie).Select(review => review.Reviewer).ToList();
         }
     }

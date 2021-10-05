@@ -8,9 +8,6 @@ namespace MovieCompulsory.DataJson
 {
     public class JsonData
     {
-        
-
-
         public List<BEReview> GetAllReviews()
         {
             List<BEReview> items;
