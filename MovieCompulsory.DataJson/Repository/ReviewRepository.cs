@@ -14,11 +14,6 @@ namespace MovieCompulsory.DataJson.Repository
         {
             _allReviews = new JsonData().GetAllReviews();
         }
-        
-        public ReviewRepository(List<BEReview> reviews)
-        {
-            _allReviews = reviews;
-        }
 
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
@@ -53,8 +48,30 @@ namespace MovieCompulsory.DataJson.Repository
 
         public int GetNumberOfRatesByReviewer(int reviewer, int rate)
         {
-            return _allReviews
-                .Where(r => r.Reviewer == reviewer).Count(rt => rt.Grade == rate);
+            if (reviewer <= 0)
+            {
+                throw new InvalidOperationException("The reviewer Id must be above zero");
+            }else if (rate < 0)
+            {
+                throw new InvalidOperationException("The rating is bellow range");
+            }else if (rate > 5)
+            {
+                throw new InvalidOperationException("The rating is above range");
+            }
+            else
+            {
+                var numberOfRatesByReviewer=_allReviews
+                    .Where(r => r.Reviewer == reviewer).Count(rt => rt.Grade == rate);
+
+                if (numberOfRatesByReviewer == 0)
+                {
+                    throw new InvalidOperationException("No rates where found for reviewer");
+                }
+                else
+                {
+                    return numberOfRatesByReviewer;
+                }
+            }
         }
 
         public int GetNumberOfReviews(int movie)
@@ -79,6 +96,13 @@ namespace MovieCompulsory.DataJson.Repository
 
         public int GetNumberOfRates(int movie, int rate)
         {
+            if (movie < 0)
+            {
+                throw new InvalidOperationException("Movie id must be above zero");
+            }else if (rate is > 5 or < 0)
+            {
+                throw new InvalidOperationException("Rate is outside of the range");
+            }
             return _allReviews
                 .Where(r => r.Movie == movie).Count(rt => rt.Grade == rate);
         }
@@ -123,19 +147,52 @@ namespace MovieCompulsory.DataJson.Repository
 
         public List<int> GetTopRatedMovies(int amount)
         {
-            return _allReviews.OrderByDescending(review => review.Grade).Select(review => review.Movie).Distinct().Take(amount).ToList(); 
+            int highestId = _allReviews.Max(m => m.Movie);
+            if (amount < 0)
+            {
+                throw new InvalidOperationException("Amount must be above zero");
+            }else if (amount > highestId)
+            {
+                throw new InvalidOperationException("Amount is outside the range");
+            }
+            else
+            {
+                return _allReviews.OrderByDescending(review => review.Grade).Select(review => review.Movie).Distinct().Take(amount).ToList(); 
+            }
         }
 
         public List<int> GetTopMoviesByReviewer(int reviewer)
         {
-            return _allReviews.OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
-                .Where(review => review.Reviewer == reviewer).Select(review => review.Movie).ToList();
+            int highestId = _allReviews.Max(m => m.Reviewer);
+            if (reviewer < 0)
+            {
+                throw new InvalidOperationException("Id must be above zero");
+            }else if (reviewer > highestId)
+            {
+                throw new InvalidOperationException("Id is outside of the range");
+            }
+            else
+            {
+                return _allReviews.OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
+                    .Where(review => review.Reviewer == reviewer).Select(review => review.Movie).ToList();
+            }
         }
 
         public List<int> GetReviewersByMovie(int movie)
         {
-            return _allReviews.OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
-                .Where(review => review.Movie == movie).Select(review => review.Reviewer).ToList();
+            int highestId = _allReviews.Max(m => m.Movie);
+            if (movie < 0)
+            {
+                throw new InvalidOperationException("Id must be above zero");
+            }else if (movie > highestId)
+            {
+                throw new InvalidOperationException("Id is outside of the range");
+            }
+            else
+            {
+                return _allReviews.OrderByDescending(review => review.Grade).ThenByDescending(review => review.ReviewDate)
+                    .Where(review => review.Movie == movie).Select(review => review.Reviewer).ToList();
+            }
         }
     }
 }
