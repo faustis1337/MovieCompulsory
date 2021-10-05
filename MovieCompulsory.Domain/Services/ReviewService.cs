@@ -12,8 +12,7 @@ namespace MovieCompulsory.Domain.Services
         {
             _reviewRepository = reviewRepository;
         }
-
-
+        
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
             return _reviewRepository.GetNumberOfReviewsFromReviewer(reviewer);

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using MovieCompulsory.Core.Models;
 using MovieCompulsory.Domain.IRepository;
+using Newtonsoft.Json;
 
 namespace MovieCompulsory.DataJson.Repository
 {
@@ -10,9 +12,10 @@ namespace MovieCompulsory.DataJson.Repository
 
     {
         private readonly List<BEReview> _allReviews;
-        public ReviewRepository()
+        public ReviewRepository(TextReader textReader)
         {
-            _allReviews = new JsonData().GetAllReviews();
+            string jsonAsString = textReader.ReadToEnd();
+            _allReviews = JsonConvert.DeserializeObject<List<BEReview>>(jsonAsString);
         }
 
         public int GetNumberOfReviewsFromReviewer(int reviewer)
